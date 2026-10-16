@@ -1,10 +1,10 @@
 import { useState, useEffect, useMemo } from 'react';
 import confetti from 'canvas-confetti';
-import Header from './components/Header';
-import Editor from './components/Editor';
-import TodoList from './components/TodoList';
-import { CATEGORIES } from './constants';
-import './App.css';
+import Header from '../features/todos/components/Header';
+import Editor from '../features/todos/components/Editor';
+import TodoList from '../features/todos/components/TodoList';
+import { CATEGORIES } from '../features/todos/constants';
+import '../styles/app.css';
 
 const STORAGE_KEY = 'cotton_candy_todos_v1';
 

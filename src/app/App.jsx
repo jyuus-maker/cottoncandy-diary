@@ -184,11 +184,12 @@ function App() {
       <div className="floating-sparkle" style={{ bottom: '20%', left: '12%' }}>☁️</div>
 
       {/* Main Glassmorphic Card */}
-      <main className="main-card">
+      <div className="diary-cover">
         <nav className="app-feature-nav" aria-label="다이어리 도구">
           <button aria-pressed={feature === 'todos'} onClick={() => setFeature('todos')}>솜사탕 투두</button>
           <button aria-pressed={feature === 'wheel'} onClick={() => setFeature('wheel')}>솜사탕 룰렛</button>
         </nav>
+        <main className="main-card">
         {feature === 'wheel' ? <Wheel /> : <>
         {/* Header (Date/Clock + Progress) */}
         <Header totalCount={todos.length} completedCount={completedCount} />
@@ -211,7 +212,8 @@ function App() {
           onClearCompleted={handleClearCompleted}
         />
         </>}
-      </main>
+        </main>
+      </div>
 
       {/* Toast Notification */}
       {toastMsg && <div className="toast-msg">{toastMsg}</div>}

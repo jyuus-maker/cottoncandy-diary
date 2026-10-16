@@ -766,6 +766,7 @@
 }
 .app-feature-nav button {
   position: relative;
+  z-index: 0;
   height: 140px;
   display: flex;
   align-items: flex-start;
@@ -790,9 +791,10 @@
 }
 .app-feature-nav button:nth-child(2)[aria-pressed="true"] { background: #f0e9fc; }
 @media (hover: hover) {
-  .app-feature-nav button:hover { transform: translate(5px, -9px) rotate(5deg); }
+  .app-feature-nav button:hover { z-index: 1; transform: translate(5px, -9px) rotate(5deg); }
 }
 .app-feature-nav button:focus-visible {
+  z-index: 1;
   outline: 3px solid #9d65fe;
   outline-offset: 4px;
   transform: translate(5px, -9px) rotate(5deg);

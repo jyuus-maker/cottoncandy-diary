@@ -25,8 +25,5 @@
 .wheel-result { text-align:center; width:100%; min-height:100px; padding:12px; }
 .wheel-result h2 { font-size:27px; color:#a46f94; margin:8px 0; overflow-wrap:anywhere; }
 .wheel-actions { display:flex; justify-content:center; flex-wrap:wrap; gap:12px; }
-.app-feature-nav { display:flex; justify-content:center; gap:6px; padding:5px; border:1px solid #fff; background:#ffffff80; border-radius:999px; width:fit-content; margin:0 auto 28px; }
-.app-feature-nav button { padding:10px 23px; border-radius:999px; color:#907b9f; font-size:14px; }
-.app-feature-nav button[aria-pressed="true"] { background:white; color:#a46f94; box-shadow:0 3px 12px #b59bc525; }
-@media(max-width:480px) { .wheel-heading h1 {font-size:36px;} .wheel-input-meta {flex-direction:column; gap:5px;} .wheel-frame {width:min(100%,285px);} .app-feature-nav button {padding:10px 17px;} }
+@media(max-width:480px) { .wheel-heading h1 {font-size:36px;} .wheel-input-meta {flex-direction:column; gap:5px;} .wheel-frame {width:min(100%,285px);} }
 @media(prefers-reduced-motion:reduce) { .wheel-disk {visibility:hidden;} .wheel-frame {background:#f3e8ff; border-radius:50%;} }

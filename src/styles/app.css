@@ -748,6 +748,18 @@
   isolation: isolate;
 }
 .diary-cover > .main-card { z-index: 1; }
+.diary-cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: var(--radius-card);
+  pointer-events: none;
+  background: linear-gradient(to bottom, #fff 0, #fff 94px, transparent 190px);
+}
+@media (max-width: 480px) {
+  .diary-cover::before { border-radius: 24px; }
+}
 
 .app-feature-nav {
   position: absolute;

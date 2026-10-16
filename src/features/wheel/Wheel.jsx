@@ -102,7 +102,7 @@ export default function Wheel() {
                   const b = ((i + 1) * size - 90) * Math.PI / 180;
                   return <g key={i}>
                     <path d={`M150 150 L${150 + 148 * Math.cos(a)} ${150 + 148 * Math.sin(a)} A148 148 0 ${size > 180 ? 1 : 0} 1 ${150 + 148 * Math.cos(b)} ${150 + 148 * Math.sin(b)} Z`} fill={COLORS[i % COLORS.length]} stroke="#fff" strokeWidth="1.5" />
-                    <text x="242" y="150" dy=".35em" textAnchor="middle" transform={`rotate(${(i + 0.5) * size - 90} 150 150)`} fill="#493b59" fontSize={items.length > 16 ? 7 : 11} fontWeight="700">{name.length > 8 ? `${name.slice(0, 7)}…` : name}</text>
+                    <text x="242" y="150" dy=".35em" textAnchor="middle" transform={`rotate(${(i + 0.5) * size - 90} 150 150)`} fill="#493b59" fontSize={items.length > 16 ? 9.1 : 14.3} fontWeight="700">{name.length > 8 ? `${name.slice(0, 7)}…` : name}</text>
                   </g>;
                 })}
               </svg>

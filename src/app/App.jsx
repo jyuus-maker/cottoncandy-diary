@@ -1,3 +1,4 @@
+import Wheel from '../features/wheel/Wheel';
 import { useState, useEffect, useMemo } from 'react';
 import confetti from 'canvas-confetti';
 import Header from '../features/todos/components/Header';
@@ -36,6 +37,7 @@ const DEFAULT_TODOS = [
 ];
 
 function App() {
+  const [feature, setFeature] = useState('todos');
   const [todos, setTodos] = useState(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -183,6 +185,11 @@ function App() {
 
       {/* Main Glassmorphic Card */}
       <main className="main-card">
+        <nav className="app-feature-nav" aria-label="다이어리 도구">
+          <button aria-pressed={feature === 'todos'} onClick={() => setFeature('todos')}>솜사탕 투두</button>
+          <button aria-pressed={feature === 'wheel'} onClick={() => setFeature('wheel')}>솜사탕 룰렛</button>
+        </nav>
+        {feature === 'wheel' ? <Wheel /> : <>
         {/* Header (Date/Clock + Progress) */}
         <Header totalCount={todos.length} completedCount={completedCount} />
 
@@ -203,6 +210,7 @@ function App() {
           onEditTodo={handleEditTodo}
           onClearCompleted={handleClearCompleted}
         />
+        </>}
       </main>
 
       {/* Toast Notification */}

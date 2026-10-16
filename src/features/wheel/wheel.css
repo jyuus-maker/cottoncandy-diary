@@ -16,8 +16,8 @@
 .candy-wheel button:disabled { opacity:.5; cursor:default; }
 .wheel-help { text-align:center; margin-top:14px; }
 .wheel-stage { display:flex; flex-direction:column; align-items:center; }
-.wheel-frame { position:relative; width:min(100%,340px); aspect-ratio:1; margin:18px auto 20px; }
-.wheel-disk { width:100%; height:100%; border:9px solid white; border-radius:50%; box-shadow:0 12px 35px #a77dbe30; overflow:hidden; }
+.wheel-frame { position:relative; width:min(100%,340px); aspect-ratio:1; margin:18px auto 20px; border-radius:50%; box-shadow:0 12px 35px #a77dbe30; }
+.wheel-disk { width:100%; height:100%; border:9px solid white; border-radius:50%; overflow:hidden; }
 .wheel-disk svg { display:block; width:100%; height:100%; }
 .wheel-pointer { position:absolute; top:-7px; left:50%; transform:translateX(-50%); z-index:2; width:0; height:0; border-left:12px solid transparent; border-right:12px solid transparent; border-top:26px solid #a56897; filter:drop-shadow(0 3px 2px #75486422); }
 .wheel-stop { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border:5px solid white; width:80px; height:80px; background:#b67caa; border-radius:50%; color:white; font-size:12px; font-weight:bold; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; box-shadow:0 4px 15px #59436625; }

@@ -12,7 +12,7 @@ const STORAGE_KEY = 'cotton_candy_todos_v1';
 const DEFAULT_TODOS = [
   {
     id: '1',
-    text: '솜사탕 웹앱 둘러보기 ☁️',
+    text: '창문 열고 환기하기 ☁️',
     completed: true,
     category: CATEGORIES[0], // 일상
     createdAt: '오후 09:00',
@@ -28,7 +28,7 @@ const DEFAULT_TODOS = [
   },
   {
     id: '3',
-    text: '리액트 투두리스트 예쁘게 완성하기 🌸',
+    text: '미뤄둔 책 조금 읽기 🌸',
     completed: true,
     category: CATEGORIES[2], // 공부
     createdAt: '오후 09:17',

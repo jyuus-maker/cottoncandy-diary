@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { RotateCcw, Sparkles, Pencil, CircleStop } from 'lucide-react';
-import { COLORS, STORAGE_KEY, getTargetAngle, parseItems } from './wheel';
+import { COLORS, STORAGE_KEY, getTargetAngle, getStopDuration, SPIN_SPEED, parseItems } from './wheel';
 import './wheel.css';
 
 export default function Wheel() {
@@ -31,11 +31,11 @@ export default function Wheel() {
     let previous;
     const tick = (time) => {
       if (phase === 'spinning') {
-        angle.current += previous === undefined ? 0 : Math.min(time - previous, 64) * 0.65;
+        angle.current += previous === undefined ? 0 : Math.min(time - previous, 64) * SPIN_SPEED;
       } else {
         const data = stop.current;
         data.started ??= time;
-        const p = Math.min(1, (time - data.started) / 3200);
+        const p = Math.min(1, (time - data.started) / data.duration);
         angle.current = data.from + (data.to - data.from) * (1 - (1 - p) ** 3);
         if (p === 1) {
           disk.current.style.transform = `rotate(${angle.current}deg)`;
@@ -60,10 +60,12 @@ export default function Wheel() {
   const finish = () => {
     if (phase !== 'spinning' || stop.current?.pending) return;
     const index = Math.floor((crypto.getRandomValues(new Uint32Array(1))[0] / 4294967296) * items.length);
+    const target = getTargetAngle(angle.current, index, items.length);
     stop.current = {
+      duration: getStopDuration(angle.current, target),
       pending: true,
       from: angle.current,
-      to: getTargetAngle(angle.current, index, items.length),
+      to: target,
       winner: items[index],
     };
     setPhase('stopping');

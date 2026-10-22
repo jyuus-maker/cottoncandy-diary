@@ -318,7 +318,8 @@
   align-items: center;
   gap: 8px;
   overflow-x: auto;
-  padding-bottom: 4px;
+  /* Leave room for the raised active tab and its shadow inside the scrollport. */
+  padding: 6px 0 12px;
   scrollbar-width: none;
 }
 

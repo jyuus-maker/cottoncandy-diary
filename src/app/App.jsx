@@ -37,7 +37,14 @@ const DEFAULT_TODOS = [
 ];
 
 function App() {
-  const [feature, setFeature] = useState('todos');
+  const [feature, setFeature] = useState(() => {
+    try { return sessionStorage.getItem('cotton_candy_feature') === 'wheel' ? 'wheel' : 'todos'; }
+    catch { return 'todos'; }
+  });
+  const selectFeature = (next) => {
+    setFeature(next);
+    try { sessionStorage.setItem('cotton_candy_feature', next); } catch { /* Storage may be unavailable. */ }
+  };
   const [todos, setTodos] = useState(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -186,8 +193,8 @@ function App() {
       {/* Main Glassmorphic Card */}
       <div className="diary-cover">
         <nav className="app-feature-nav" aria-label="다이어리 도구">
-          <button aria-pressed={feature === 'todos'} onClick={() => setFeature('todos')}>솜사탕 투두</button>
-          <button aria-pressed={feature === 'wheel'} onClick={() => setFeature('wheel')}>솜사탕 룰렛</button>
+          <button aria-pressed={feature === 'todos'} onClick={() => selectFeature('todos')}>솜사탕 투두</button>
+          <button aria-pressed={feature === 'wheel'} onClick={() => selectFeature('wheel')}>솜사탕 룰렛</button>
         </nav>
         <main className="main-card">
         {feature === 'wheel' ? <Wheel /> : <>

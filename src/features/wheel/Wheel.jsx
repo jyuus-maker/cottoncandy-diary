@@ -7,7 +7,12 @@ export default function Wheel() {
   const [text, setText] = useState(() => {
     try { return localStorage.getItem(STORAGE_KEY) || ''; } catch { return ''; }
   });
-  const [phase, setPhase] = useState('input');
+  const [phase, setPhase] = useState(() => {
+    try {
+      return parseItems(text).length >= 2 && sessionStorage.getItem('cotton_candy_wheel_screen') === 'stage'
+        ? 'spinning' : 'input';
+    } catch { return 'input'; }
+  });
   const [result, setResult] = useState(null);
   const [storageError, setStorageError] = useState(false);
   const disk = useRef(null);
@@ -56,6 +61,7 @@ export default function Wheel() {
     if (items.length < 2) return;
     setResult(null);
     setPhase('spinning');
+    try { sessionStorage.setItem('cotton_candy_wheel_screen', 'stage'); } catch { /* Storage may be unavailable. */ }
   };
   const finish = () => {
     if (phase !== 'spinning' || stop.current?.pending) return;
@@ -71,7 +77,12 @@ export default function Wheel() {
     setPhase('stopping');
   };
   const retry = () => { stop.current = null; start(); };
-  const edit = () => { stop.current = null; setResult(null); setPhase('input'); };
+  const edit = () => {
+    stop.current = null;
+    setResult(null);
+    setPhase('input');
+    try { sessionStorage.setItem('cotton_candy_wheel_screen', 'input'); } catch { /* Storage may be unavailable. */ }
+  };
 
   return (
     <section className="candy-wheel" aria-labelledby="wheel-title">

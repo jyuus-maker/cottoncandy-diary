@@ -3,6 +3,22 @@ import { RotateCcw, Sparkles, Pencil, CircleStop } from 'lucide-react';
 import { COLORS, STORAGE_KEY, getTargetAngle, getStopDuration, SPIN_SPEED, parseItems } from './wheel';
 import './wheel.css';
 
+function wrapLabel(name) {
+  const letters = Array.from(name.trim());
+  if (letters.length <= 8) return [letters.join('')];
+  // Prefer a space between words; split only when a word cannot fit.
+  let split = letters.slice(0, 9).lastIndexOf(' ');
+  if (split <= 0) split = 8;
+  const first = letters.slice(0, split).join('');
+  const rest = letters.slice(split).join('').trim();
+  const remaining = Array.from(rest);
+  if (remaining.length <= 8) return [first, rest];
+  const preview = remaining.slice(0, 8);
+  const boundary = preview.lastIndexOf(' ');
+  const second = remaining.slice(0, boundary > 0 ? boundary : 7).join('').trimEnd();
+  return [first, second + '…'];
+}
+
 export default function Wheel() {
   const [text, setText] = useState(() => {
     try { return localStorage.getItem(STORAGE_KEY) || ''; } catch { return ''; }
@@ -94,7 +110,7 @@ export default function Wheel() {
       {phase === 'input' ? (
         <div className="wheel-input-panel">
           <label htmlFor="wheel-options">무엇을 골라볼까요?</label>
-          <p id="wheel-input-hint">메뉴도, 할 일도 좋아요. 한 줄에 하나씩 적어주세요.</p>
+          <p id="wheel-input-hint">점심메뉴도, 생각나는 할 일도 좋아요. 한 줄에 하나씩 적어주세요.</p>
           <textarea id="wheel-options" aria-describedby="wheel-input-hint wheel-count" value={text}
             onChange={(e) => handleTextChange(e.target.value)} placeholder={'파스타 먹기\n산책 나가기\n책 읽기'} />
           <div className="wheel-input-meta" id="wheel-count"><span>{items.length}개의 선택지</span><span>{storageError ? '이 브라우저에서는 저장할 수 없어요' : '이 브라우저에 자동 저장돼요'}</span></div>
@@ -111,11 +127,7 @@ export default function Wheel() {
                   const size = 360 / items.length;
                   const a = (i * size - 90) * Math.PI / 180;
                   const b = ((i + 1) * size - 90) * Math.PI / 180;
-                  const letters = Array.from(name);
-                  const lines = letters.length <= 8 ? [name] : [
-                    letters.slice(0, 8).join(''),
-                    letters.length > 16 ? `${letters.slice(8, 15).join('')}…` : letters.slice(8).join(''),
-                  ];
+                  const lines = wrapLabel(name);
                   return <g key={i}>
                     <path d={`M150 150 L${150 + 148 * Math.cos(a)} ${150 + 148 * Math.sin(a)} A148 148 0 ${size > 180 ? 1 : 0} 1 ${150 + 148 * Math.cos(b)} ${150 + 148 * Math.sin(b)} Z`} fill={COLORS[i % COLORS.length]} stroke="#fff" strokeWidth="1.5" />
                     <text x="242" y="150" textAnchor="middle" transform={`rotate(${(i + 0.5) * size - 90} 150 150)`} fill="#493b59" fontSize={items.length > 16 ? 9.1 : 14.3} fontWeight="700">
